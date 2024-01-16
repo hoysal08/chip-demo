@@ -1,11 +1,15 @@
-import { Amarante } from "next/font/google";
 import "./UserListModal.css";
-const UserListModal = ({ UserList }) => {
-  console.log(UserList);
+
+const UserListModal = ({ UserList, selectUser }) => {
+  UserList = UserList.slice(0, 5);
   return (
     <ul className="user-list-modal">
       {UserList.map((user, index) => {
-        return <li key={index}>{user.name}</li>;
+        return (
+          <li onClick={() => selectUser(user)} key={index}>
+            {user.name}
+          </li>
+        );
       })}
     </ul>
   );

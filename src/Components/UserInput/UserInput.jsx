@@ -3,28 +3,9 @@ import { useEffect, useState } from "react";
 import "./UserInput.css";
 import UserCard from "../UserCard/UserCard";
 import UserListModal from "../UserListModal/UserListModal";
-const arr = [
-  {
-    name: "abc",
-    email: "abc@example.com",
-  },
-  {
-    name: "dcb",
-    email: "dcb@example.com",
-  },
-  {
-    name: "egs",
-    email: "egs@example.com",
-  },
-  {
-    name: "wasf",
-    email: "wasf@example.com",
-  },
-  {
-    name: "hgds",
-    email: "hgds@example.com",
-  },
-];
+import { users } from "../../constants/index";
+
+const arr = users;
 
 const UserInput = () => {
   const [selectedUser, setSelectedUser] = useState([
@@ -61,7 +42,9 @@ const UserInput = () => {
   };
 
   const selectUser = (user) => {
-    setSelectedUser(selectedUser.push(user));
+    const updatedSelectedUser = [...selectedUser];
+    updatedSelectedUser.push(user);
+    setSelectedUser(updatedSelectedUser);
   };
 
   return (
@@ -77,8 +60,8 @@ const UserInput = () => {
         );
       })}
       <div className="new-input">
-        <input onChange={(e) => handleInput(e)} />
-        {true && <UserListModal UserList={suggestedUsers} />}
+        <input onChange={(e) => handleInput(e)} type="text" />
+        {<UserListModal UserList={suggestedUsers} selectUser={selectUser} />}
       </div>
     </div>
   );
