@@ -1,28 +1,34 @@
 import Image from "next/image";
 import "./UserListModal.css";
 import { useEffect, useRef } from "react";
+import { UserInfo } from "@/types";
 
-const UserListModal = ({ UserList, selectUser }) => {
-  const firstListItemRef = useRef(null);
+interface UserListModalProps {
+  UserList: import("@/types").UserInfo[];
+  selectUser: (user: UserInfo) => void;
+}
+
+const UserListModal: React.FC<UserListModalProps> = ({ UserList, selectUser }) => {
+  const firstListItemRef = useRef<HTMLLIElement | null>(null);
 
   useEffect(() => {
     if (firstListItemRef.current) {
       firstListItemRef.current.focus();
     }
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowUp") {
         event.preventDefault();
-        const currentItem = document.activeElement;
-        const previousItem = currentItem.previousSibling;
+        const currentItem = document.activeElement as HTMLElement;
+        const previousItem = currentItem.previousSibling as HTMLElement;
 
         if (previousItem) {
           previousItem.focus();
         }
       } else if (event.key === "ArrowDown") {
         event.preventDefault();
-        const currentItem = document.activeElement;
-        const nextItem = currentItem.nextSibling;
+        const currentItem = document.activeElement as HTMLElement;
+        const nextItem = currentItem.nextSibling as HTMLElement;
 
         if (nextItem) {
           nextItem.focus();

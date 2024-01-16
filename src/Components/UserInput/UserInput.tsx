@@ -1,23 +1,25 @@
 "use client";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import "./UserInput.css";
-import UserCard from "../UserCard/UserCard";
-import UserListModal from "../UserListModal/UserListModal";
+import UserCard from "../UserCard/UserCard.tsx";
+import UserListModal from "../UserListModal/UserListModal.tsx";
 import { users } from "../../constants/index";
+import { UserInfo } from "@/types";
 
 const arr = users;
 
 const UserInput = () => {
-  const [selectedUsers, setSelectedUsers] = useState([]);
+  const initialUserList: UserInfo[] = [];
+  const [selectedUsers, setSelectedUsers] = useState<UserInfo[]>(initialUserList);
 
-  const [currentInput, setCurrentInput] = useState("");
-  const [suggestedUsers, setSuggestedUsers] = useState([]);
-  const [isFocused, setIsFocused] = useState(false);
+  const [currentInput, setCurrentInput] = useState<String>("");
+  const [suggestedUsers, setSuggestedUsers] = useState<UserInfo[]>(initialUserList);
+  const [isFocused, setIsFocused] = useState<Boolean>(false);
   const handleFocus = () => {
     setIsFocused(true);
   };
 
-  const handleInput = (e) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentInput(e.target.value);
   };
 
@@ -26,9 +28,9 @@ const UserInput = () => {
   }, [currentInput, selectedUsers]);
 
   const filterSuggestion = () => {
-    const inputText = currentInput.toLowerCase();
+    const inputText: string = currentInput.toLowerCase();
 
-    const matchingUsers = arr.filter(
+    const matchingUsers: UserInfo[] = arr.filter(
       (user) =>
         user.name.toLowerCase().includes(inputText) &&
         !selectedUsers.some(
@@ -39,12 +41,12 @@ const UserInput = () => {
     setSuggestedUsers(matchingUsers);
   };
 
-  const removeUserByName = (name) => {
+  const removeUserByName = (name: string) => {
     setSelectedUsers(selectedUsers.filter((user) => user.name !== name));
   };
 
-  const selectUser = (user) => {
-    const updatedSelectedUser = [...selectedUsers];
+  const selectUser = (user: UserInfo) => {
+    const updatedSelectedUser: UserInfo[] = [...selectedUsers];
     updatedSelectedUser.push(user);
     setSelectedUsers(updatedSelectedUser);
     setCurrentInput("");

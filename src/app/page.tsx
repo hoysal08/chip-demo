@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import "./page.css"
-import UserInput from "../Components/UserInput/UserInput"
+import UserInput from "../Components/UserInput/UserInput.tsx"
 
 export default function Home() {
   return (
