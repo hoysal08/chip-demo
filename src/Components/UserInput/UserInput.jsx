@@ -8,7 +8,7 @@ import { users } from "../../constants/index";
 const arr = users;
 
 const UserInput = () => {
-  const [selectedUsers, setSelectedUsers] = useState([arr[0], arr[1]]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   const [currentInput, setCurrentInput] = useState("");
   const [suggestedUsers, setSuggestedUsers] = useState([]);
@@ -47,6 +47,7 @@ const UserInput = () => {
     const updatedSelectedUser = [...selectedUsers];
     updatedSelectedUser.push(user);
     setSelectedUsers(updatedSelectedUser);
+    setCurrentInput("");
   };
 
   return (
@@ -62,16 +63,22 @@ const UserInput = () => {
         );
       })}
 
-      {suggestedUsers.length > 0 && (
+      {selectedUsers.length != arr.length && (
         <div className="new-input-container">
           <input
             onChange={(e) => handleInput(e)}
             onFocus={handleFocus}
             type="text"
-            placeholder="enter name"
+            placeholder="Enter name"
+            value={currentInput}
           />
           {isFocused && (
-            <UserListModal UserList={suggestedUsers} selectUser={selectUser} />
+            <UserListModal
+              UserList={suggestedUsers}
+              selectUser={selectUser}
+              setCurrentInput={setCurrentInput}
+              currentInput={currentInput}
+            />
           )}
         </div>
       )}

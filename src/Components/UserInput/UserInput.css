@@ -2,17 +2,13 @@
   border-bottom: 1px solid blue;
   display: flex;
   align-items: center;
-  flex-basis: 100%;
-}
-.user-input-container {
-  display: flex;
-  flex-direction: row;
 }
 .new-input-container input {
   margin: 0rem 0.5rem;
   background-color: #fff;
   border: none;
   font-size: 1.2rem;
+  color: black;
 }
 .new-input-container input:focus {
   outline: none;

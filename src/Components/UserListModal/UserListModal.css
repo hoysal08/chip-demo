@@ -5,10 +5,12 @@
   background-color: #fff;
   box-shadow: 0 8px 8px -4px #fff;
   overflow: scroll;
-  height: 10rem;
+  max-height: 10rem;
   padding: 0.2rem 0.8rem;
   border-radius: 0.5rem;
   margin-top: 0.5rem;
+  box-shadow: 1px 1px 0px #999, 2px 2px 0px #999, 3px 3px 0px #999,
+    4px 4px 0px #999, 5px 5px 0px #999, 6px 6px 0px #999;
 }
 .user-list-item {
   display: flex;
