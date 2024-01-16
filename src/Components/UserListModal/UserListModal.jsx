@@ -5,7 +5,7 @@ const UserListModal = ({ UserList }) => {
   return (
     <ul className="user-list-modal">
       {UserList.map((user, index) => {
-        return <li>{user.name}</li>;
+        return <li key={index}>{user.name}</li>;
       })}
     </ul>
   );

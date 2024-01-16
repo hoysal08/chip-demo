@@ -1,6 +1,13 @@
 import "./UserCard.css";
-const UserCard = ({ name }) => {
-  return <div className="user-card-container">{name}</div>;
+const UserCard = ({ name, index, removeUser }) => {
+  return (
+    <div className="user-card-container">
+      {name}
+      <p className="close" onClick={() => removeUser(name)}>
+        X
+      </p>
+    </div>
+  );
 };
 
 export default UserCard;
