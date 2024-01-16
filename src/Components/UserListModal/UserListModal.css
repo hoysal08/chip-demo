@@ -1,0 +1,7 @@
+.user-list-modal {
+  list-style: none;
+  position: absolute;
+  z-index: 2;
+  background-color: pink;
+  overflow: visible;
+}

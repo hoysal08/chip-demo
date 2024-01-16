@@ -1,0 +1,8 @@
+.user-input-container {
+  border-bottom: 1px solid blue;
+}
+.user-input-container {
+  display: flex;
+}
+.new-input {
+}
