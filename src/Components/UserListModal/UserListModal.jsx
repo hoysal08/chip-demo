@@ -2,12 +2,7 @@ import Image from "next/image";
 import "./UserListModal.css";
 import { useEffect, useRef } from "react";
 
-const UserListModal = ({
-  UserList,
-  selectUser,
-  setCurrentInput,
-  currentInput,
-}) => {
+const UserListModal = ({ UserList, selectUser }) => {
   const firstListItemRef = useRef(null);
 
   useEffect(() => {
@@ -32,13 +27,6 @@ const UserListModal = ({
         if (nextItem) {
           nextItem.focus();
         }
-      } else if (
-        (event.keyCode >= 65 && event.keyCode <= 90) ||
-        (event.keyCode >= 97 && event.keyCode <= 122)
-      ) {
-        console.log(event);
-        console.log(event.target.value);
-        console.log(currentInput + event.keyCode);
       }
     };
 
@@ -49,6 +37,13 @@ const UserListModal = ({
     };
   }, []);
 
+  if (UserList.length == 0) {
+    return (
+      <ul className="user-list-modal">
+        <p>No Result found!</p>
+      </ul>
+    );
+  }
   return (
     <ul className="user-list-modal">
       {UserList.map((user, index) => {
