@@ -8,7 +8,7 @@ import { users } from "../../constants/index";
 const arr = users;
 
 const UserInput = () => {
-  const [selectedUser, setSelectedUser] = useState([
+  const [selectedUsers, setSelectedUsers] = useState([
     {
       name: "wasf",
       email: "wasf@example.com",
@@ -21,6 +21,10 @@ const UserInput = () => {
 
   const [currentInput, setCurrentInput] = useState("");
   const [suggestedUsers, setSuggestedUsers] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
 
   const handleInput = (e) => {
     setCurrentInput(e.target.value);
@@ -28,28 +32,35 @@ const UserInput = () => {
 
   useEffect(() => {
     filterSuggestion();
-  }, [currentInput]);
+  }, [currentInput, selectedUsers]);
 
   const filterSuggestion = () => {
-    const matchingUsers = arr.filter((user) =>
-      user.name.toLowerCase().includes(currentInput.toLowerCase())
+    const inputText = currentInput.toLowerCase();
+
+    const matchingUsers = arr.filter(
+      (user) =>
+        user.name.toLowerCase().includes(inputText) &&
+        !selectedUsers.some(
+          (selectedUser) =>
+            selectedUser.name.toLowerCase() === user.name.toLowerCase()
+        )
     );
     setSuggestedUsers(matchingUsers);
   };
 
   const removeUserByName = (name) => {
-    setSelectedUser(selectedUser.filter((user) => user.name !== name));
+    setSelectedUsers(selectedUsers.filter((user) => user.name !== name));
   };
 
   const selectUser = (user) => {
-    const updatedSelectedUser = [...selectedUser];
+    const updatedSelectedUser = [...selectedUsers];
     updatedSelectedUser.push(user);
-    setSelectedUser(updatedSelectedUser);
+    setSelectedUsers(updatedSelectedUser);
   };
 
   return (
     <div className="user-input-container">
-      {selectedUser.map((user, index) => {
+      {selectedUsers.map((user, index) => {
         return (
           <UserCard
             name={user.name}
@@ -60,8 +71,14 @@ const UserInput = () => {
         );
       })}
       <div className="new-input">
-        <input onChange={(e) => handleInput(e)} type="text" />
-        {<UserListModal UserList={suggestedUsers} selectUser={selectUser} />}
+        <input
+          onChange={(e) => handleInput(e)}
+          onFocus={handleFocus}
+          type="text"
+        />
+        {isFocused && (
+          <UserListModal UserList={suggestedUsers} selectUser={selectUser} />
+        )}
       </div>
     </div>
   );
