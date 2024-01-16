@@ -8,16 +8,7 @@ import { users } from "../../constants/index";
 const arr = users;
 
 const UserInput = () => {
-  const [selectedUsers, setSelectedUsers] = useState([
-    {
-      name: "wasf",
-      email: "wasf@example.com",
-    },
-    {
-      name: "hgds",
-      email: "hgds@example.com",
-    },
-  ]);
+  const [selectedUsers, setSelectedUsers] = useState([arr[0], arr[1]]);
 
   const [currentInput, setCurrentInput] = useState("");
   const [suggestedUsers, setSuggestedUsers] = useState([]);
@@ -63,23 +54,27 @@ const UserInput = () => {
       {selectedUsers.map((user, index) => {
         return (
           <UserCard
-            name={user.name}
+            user={user}
             index={index}
             key={index}
             removeUser={removeUserByName}
           />
         );
       })}
-      <div className="new-input">
-        <input
-          onChange={(e) => handleInput(e)}
-          onFocus={handleFocus}
-          type="text"
-        />
-        {isFocused && (
-          <UserListModal UserList={suggestedUsers} selectUser={selectUser} />
-        )}
-      </div>
+
+      {suggestedUsers.length > 0 && (
+        <div className="new-input-container">
+          <input
+            onChange={(e) => handleInput(e)}
+            onFocus={handleFocus}
+            type="text"
+            placeholder="enter name"
+          />
+          {isFocused && (
+            <UserListModal UserList={suggestedUsers} selectUser={selectUser} />
+          )}
+        </div>
+      )}
     </div>
   );
 };

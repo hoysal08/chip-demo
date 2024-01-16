@@ -2,6 +2,33 @@
   list-style: none;
   position: absolute;
   z-index: 2;
-  background-color: pink;
-  overflow: visible;
+  background-color: #fff;
+  box-shadow: 0 8px 8px -4px #fff;
+  overflow: scroll;
+  height: 10rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+.user-list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  margin: 0.5rem 0;
+}
+.user-list-item p {
+  margin: 0.2rem 0.5rem;
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
